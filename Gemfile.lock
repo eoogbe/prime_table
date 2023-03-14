@@ -113,6 +113,9 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
+    guard-rubocop (1.5.0)
+      guard (~> 2.0)
+      rubocop (< 2.0)
     htmlbeautifier (1.4.2)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
@@ -328,6 +331,7 @@ DEPENDENCIES
   capybara
   debug
   guard-rspec
+  guard-rubocop
   htmlbeautifier
   importmap-rails
   jbuilder

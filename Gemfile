@@ -63,6 +63,7 @@ group :development do
   # gem "spring"
 
   gem 'guard-rspec', require: false
+  gem 'guard-rubocop'
   gem 'htmlbeautifier'
   gem 'solargraph'
 end

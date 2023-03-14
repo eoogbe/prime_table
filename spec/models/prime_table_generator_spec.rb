@@ -27,5 +27,19 @@ RSpec.describe PrimeTableGenerator do
         expect(result).to all(have_attributes(size: n + 1))
       end
     end
+
+    it 'each cell is a mulitple of the first row and column' do
+      PropCheck.forall(G.positive_integer) do |n|
+        generator = described_class.new(n)
+
+        result = generator.generate
+
+        result.each_index do |i|
+          result[i].each_index do |j|
+            expect(result[i][j] / result[i][0]).to eq(result[0][j])
+          end
+        end
+      end
+    end
   end
 end
