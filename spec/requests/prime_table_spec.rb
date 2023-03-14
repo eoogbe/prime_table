@@ -12,7 +12,8 @@ RSpec.describe 'PrimeTables' do
 
   describe 'GET /show' do
     it 'returns http success' do
-      get '/prime_table/show'
+      get '/prime_table?n=3'
+
       expect(response).to have_http_status(:success)
     end
   end
