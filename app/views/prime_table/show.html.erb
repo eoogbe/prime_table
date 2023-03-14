@@ -1,0 +1,20 @@
+<table>
+  <thead>
+    <tr>
+      <% @prime_table[0].each do |n| %>
+        <% if n == 1 %>
+          <td></td>
+        <% else %>
+          <th scope="col"><%= n %></th>
+        <% end %>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @prime_table[1..].each do |row| %>
+      <tr>
+        <th scope="row"><%= row[0] %></th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
