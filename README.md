@@ -12,7 +12,7 @@ To install dependencies, run:
 $ bundle install
 ```
 
-To run the development server, run:
+To run the development server:
 
 ```console
 $ bin/dev
@@ -20,10 +20,16 @@ $ bin/dev
 
 Navigate to http://localhost:3000 to view the app.
 
-To run the tests, run:
+To run the Ruby tests:
 
 ```console
 $ bin/rspec
+```
+
+To run the JS tests:
+
+```console
+$ yarn test
 ```
 
 ## What I'm pleased with

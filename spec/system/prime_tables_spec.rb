@@ -8,11 +8,13 @@ RSpec.describe 'PrimeTables' do
   end
 
   it 'generates a multiplication table for prime numbers' do
-    visit root_path
+    Capybara.using_driver(:chrome) do
+      visit root_path
 
-    fill_in 'Number', with: '3'
-    click_button 'Generate'
+      fill_in 'Number', with: '3'
+      click_button 'Generate'
 
-    expect(page).to have_content('25')
+      expect(page).to have_content('25')
+    end
   end
 end

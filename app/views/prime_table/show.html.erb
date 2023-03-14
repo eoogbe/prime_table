@@ -2,27 +2,19 @@
 <table>
   <thead>
     <tr>
+      <td></td>
       <% @primes.each do |n| %>
-        <% if n == 1 %>
-          <td></td>
-        <% else %>
-          <th scope="col"><%= n %></th>
-        <% end %>
+        <th scope="col"><%= n %></th>
       <% end %>
     </tr>
   </thead>
   <tbody>
-    <% @primes[1..].each do |n| %>
+    <% @primes.each do |n| %>
       <tr>
-        <% @primes.each_with_index do |m, i| %>
-          <% if i == 0 %>
-            <th scope="row"><%= n %></th>
-          <% else %>
-            <td><%= n * m %></td>
-          <% end %>
-        <% end %>
+        <th scope="row"><%= n %></th>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= javascript_include_tag "multiplicationTable", "data-turbo-track": "reload", defer: true %>
+<%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+<%= javascript_tag 'document.addEventListener("DOMContentLoaded", function() { insertMultiplicationTable(); });' %>

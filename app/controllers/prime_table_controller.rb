@@ -5,7 +5,6 @@
 class PrimeTableController < ApplicationController
   def show
     @primes = PrimeGenerator.generate_n_primes(params[:n].to_i)
-    @primes.unshift 1
   end
 
   def new; end
