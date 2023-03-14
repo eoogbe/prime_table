@@ -14,15 +14,7 @@ class PrimeTableGenerator
   ##
   # Generates the prime multiplication table.
   def generate_multiplication_table
-    prime_count = 0
-    multiplier = 2
-    cur = n * multiplier
-    while prime_count < n
-      primes = self.class.calc_primes(cur)
-      prime_count = primes[2..].count(true)
-      multiplier += 1
-      cur = n * multiplier
-    end
+    primes = calc_primes
     values = [1]
     (2...primes.size).each do |i|
       values << i if primes[i]
@@ -58,4 +50,17 @@ class PrimeTableGenerator
   private
 
   attr_reader :n
+
+  def calc_primes
+    prime_count = 0
+    multiplier = 2
+    cur = n * multiplier
+    while prime_count < n
+      primes = self.class.calc_primes(cur)
+      prime_count = primes[2..].count(true)
+      multiplier += 1
+      cur = n * multiplier
+    end
+    primes
+  end
 end
