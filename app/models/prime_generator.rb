@@ -2,7 +2,7 @@
 
 ##
 # A generator for a multiplication table for prime numbers.
-module PrimeTableGenerator
+module PrimeGenerator
   extend self
 
   ##

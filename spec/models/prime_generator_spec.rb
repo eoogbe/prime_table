@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe PrimeTableGenerator do
+RSpec.describe PrimeGenerator do
   before do
     stub_const('G', PropCheck::Generators)
   end
