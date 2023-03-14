@@ -1,8 +1,8 @@
-import { getPrimes, insertMultiples } from '@app/multiplicationTable';
+import { getRowHeaders, insertMultiples } from '@app/multiplicationTable';
 
 describe('multiplicationTable', () => {
-  describe('getPrimes', () => {
-    it('returns the primes in the table', () => {
+  describe('getRowHeaders', () => {
+    it('returns the row headers in the table', () => {
       document.body.innerHTML = `<table>
         <thead>
           <tr>
@@ -25,9 +25,9 @@ describe('multiplicationTable', () => {
         </tbody>
       </table>`;
 
-      const primes = getPrimes();
+      const headers = getRowHeaders();
 
-      expect(primes).toEqual([2, 3, 5]);
+      expect(headers).toEqual([2, 3, 5]);
     });
   });
 
