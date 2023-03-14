@@ -62,6 +62,7 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 
+  gem 'guard-rspec', require: false
   gem 'htmlbeautifier'
   gem 'solargraph'
 end
@@ -71,4 +72,6 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
+
+  gem 'prop_check'
 end

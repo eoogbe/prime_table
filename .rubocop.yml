@@ -4,3 +4,6 @@ require:
   - rubocop-rspec
 AllCops:
   NewCops: enable
+Metrics/BlockLength:
+  Exclude:
+    - Guardfile
