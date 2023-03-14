@@ -24,10 +24,11 @@ class PrimeTableGenerator
   end
 
   ##
-  # Calculates primes using the Sieve of Eratosthenes.
+  # Calculates primes up to +n+ using the Sieve of Eratosthenes.
   #
+  # @param [Integer] n the size of the array
   # @return [Array<Boolean>] for any index k > 2, if index k is +true+ then k is a prime number
-  def self.calc_primes(n)
+  def self.mark_primes_up_to_n(n)
     result = [true] * (n + 1)
 
     (2..n).each do |i|
@@ -52,7 +53,7 @@ class PrimeTableGenerator
     multiplier = 2
     cur = n * multiplier
     while prime_count < n
-      primes = self.class.calc_primes(cur)
+      primes = self.class.mark_primes_up_to_n(cur)
       prime_count = primes[2..].count(true)
       multiplier += 1
       cur = n * multiplier

@@ -51,15 +51,15 @@ RSpec.describe PrimeTableGenerator do
     end
   end
 
-  describe '.calc_primes' do
+  describe '.mark_primes_up_to_n' do
     it 'returns an array marking the primes up to n as true' do
-      result = described_class.calc_primes(7)
+      result = described_class.mark_primes_up_to_n(7)
 
       expect(result[2..]).to eq([true, true, false, true, false, true])
     end
 
     it 'starts at 2' do
-      result = described_class.calc_primes(2)
+      result = described_class.mark_primes_up_to_n(2)
 
       expect(result[2]).to be(true)
     end
