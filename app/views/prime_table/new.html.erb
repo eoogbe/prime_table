@@ -1,2 +1,7 @@
-<h1>PrimeTable#new</h1>
-<p>Find me in app/views/prime_table/new.html.erb</p>
+<%= form_with method: :get, url: '/prime_table' do |form| %>
+  <div>
+    <%= form.label :n, 'Number:' %>
+    <%= form.number_field :n, min: 1 %>
+  </div>
+  <%= form.submit 'Generate' %>
+<% end %>
