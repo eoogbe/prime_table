@@ -1,21 +1,5 @@
 <%= render 'prime_table_form' %>
-<table>
-  <thead>
-    <tr>
-      <td></td>
-      <% @primes.each do |n| %>
-        <th scope="col"><%= n %></th>
-      <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% @primes.each do |n| %>
-      <tr>
-        <th scope="row"><%= n %></th>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div id="prime-table"></div>
 <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
 <script type="text/javascript">
   document.addEventListener('DOMContentLoaded', function() {
