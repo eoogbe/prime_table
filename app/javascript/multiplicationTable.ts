@@ -13,3 +13,8 @@ export const insertMultiples = (vals: number[]): void => {
     });
   });
 };
+
+export default (): void => {
+  const vals = getRowHeaders();
+  insertMultiples(vals);
+};
