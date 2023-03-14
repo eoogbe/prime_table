@@ -16,17 +16,17 @@ class PrimeTableGenerator
   def generate_multiplication_table
     prime_count = 0
     multiplier = 2
-    cur = @n * multiplier
-    while prime_count < @n
+    cur = n * multiplier
+    while prime_count < n
       primes = self.class.calc_primes(cur)
       prime_count = primes[2..].count(true)
       multiplier += 1
-      cur = @n * multiplier
+      cur = n * multiplier
     end
     values = [1]
     (2...primes.size).each do |i|
       values << i if primes[i]
-      break if values.size == @n + 1
+      break if values.size == n + 1
     end
     values.map do |i|
       values.map do |j|
@@ -54,4 +54,8 @@ class PrimeTableGenerator
 
     result
   end
+
+  private
+
+  attr_reader :n
 end
