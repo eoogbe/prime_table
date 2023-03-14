@@ -34,20 +34,34 @@ RSpec.describe PrimeTableGenerator do
 
         result = generator.generate_multiplication_table
 
-        result.each_index do |i|
-          result[i].each_index do |j|
+        (1...result.size).each do |i|
+          (1...result[i].size).each do |j|
             expect(result[i][j] / result[i][0]).to eq(result[0][j])
           end
         end
       end
     end
+
+    it 'has row headers of first n prime numbers' do
+      generator = described_class.new(3)
+
+      result = generator.generate_multiplication_table
+
+      expect(result[0]).to eq([1, 2, 3, 5])
+    end
   end
 
   describe '.calc_primes' do
-    it 'returns an array of primes up to n' do
+    it 'returns an array marking the primes up to n as true' do
       result = described_class.calc_primes(7)
 
-      expect(result[2..]).to eq([true, true, false, true, false])
+      expect(result[2..]).to eq([true, true, false, true, false, true])
+    end
+
+    it 'starts at 2' do
+      result = described_class.calc_primes(2)
+
+      expect(result[2]).to be(true)
     end
   end
 end
