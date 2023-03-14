@@ -42,4 +42,12 @@ RSpec.describe PrimeTableGenerator do
       end
     end
   end
+
+  describe '.primes' do
+    it 'returns an array of primes' do
+      result = described_class.primes(7)
+
+      expect(result[2..]).to eq([true, true, false, true, false])
+    end
+  end
 end
