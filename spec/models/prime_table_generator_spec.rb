@@ -7,12 +7,12 @@ RSpec.describe PrimeTableGenerator do
     stub_const('G', PropCheck::Generators)
   end
 
-  describe '#generate' do
+  describe '#generate_multiplication_table' do
     it 'has size n + 1' do
       PropCheck.forall(G.positive_integer) do |n|
         generator = described_class.new(n)
 
-        result = generator.generate
+        result = generator.generate_multiplication_table
 
         expect(result.size).to eq(n + 1)
       end
@@ -22,7 +22,7 @@ RSpec.describe PrimeTableGenerator do
       PropCheck.forall(G.positive_integer) do |n|
         generator = described_class.new(n)
 
-        result = generator.generate
+        result = generator.generate_multiplication_table
 
         expect(result).to all(have_attributes(size: n + 1))
       end
@@ -32,7 +32,7 @@ RSpec.describe PrimeTableGenerator do
       PropCheck.forall(G.positive_integer) do |n|
         generator = described_class.new(n)
 
-        result = generator.generate
+        result = generator.generate_multiplication_table
 
         result.each_index do |i|
           result[i].each_index do |j|

@@ -15,7 +15,7 @@ class PrimeTableGenerator
 
   ##
   # Generates the prime multiplication table.
-  def generate
+  def generate_multiplication_table
     Array.new(@n + 1, Array.new(@n + 1, 1))
   end
 end
