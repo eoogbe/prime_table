@@ -2,11 +2,8 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  moduleDirectories: [
-    'node_modules',
-    'app/javascript',
-  ],
+  moduleDirectories: ['node_modules', 'app/javascript'],
   moduleNameMapper: {
-    "^@app/(.*)$": "<rootDir>/app/javascript/$1"
-  }
+    '^@app/(.*)$': '<rootDir>/app/javascript/$1',
+  },
 };

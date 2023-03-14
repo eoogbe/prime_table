@@ -3,8 +3,5 @@
   "compilerOptions": {
     "types": ["jest"]
   },
-  "include": [
-    "app/javascript",
-    "spec/javascript"
-  ]
+  "include": ["app/javascript", "spec/javascript"]
 }
