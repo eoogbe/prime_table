@@ -1,0 +1,7 @@
+<%= form_with method: :get, url: '/prime_table' do |form| %>
+  <div>
+    <%= form.label :n, t(:number) %>
+    <%= form.number_field :n, min: 1 %>
+  </div>
+  <%= form.submit t(:generate) %>
+<% end %>
