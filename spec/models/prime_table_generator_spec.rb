@@ -64,4 +64,12 @@ RSpec.describe PrimeTableGenerator do
       expect(result[2]).to be(true)
     end
   end
+
+  describe '.generate_n_primes' do
+    it 'returns the first n prime numbers' do
+      result = described_class.generate_n_primes(3)
+
+      expect(result).to eq([2, 3, 5])
+    end
+  end
 end
