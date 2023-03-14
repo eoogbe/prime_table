@@ -1,11 +1,11 @@
-import insertTable from '@app/multiplicationTable';
+import { insertMultiplicationTable } from '@app/multiplicationTable';
 
 describe('multiplicationTable', () => {
-  describe('default', () => {
+  describe('insertMultiplicationTable', () => {
     it('creates a table', () => {
       document.body.innerHTML = `<div id="multiplication-table"></div>`;
 
-      insertTable([2, 3, 5]);
+      insertMultiplicationTable([2, 3, 5]);
 
       expect(document.getElementsByTagName('table')).toHaveLength(1);
     });
@@ -13,7 +13,7 @@ describe('multiplicationTable', () => {
     it('adds values as headers', () => {
       document.body.innerHTML = `<div id="multiplication-table"></div>`;
 
-      insertTable([2, 3, 5]);
+      insertMultiplicationTable([2, 3, 5]);
 
       const result = Array.from(document.querySelectorAll('th')).map(
         (node) => node.textContent
@@ -25,7 +25,7 @@ describe('multiplicationTable', () => {
     it('adds multiples of the values to the DOM', () => {
       document.body.innerHTML = `<div id="multiplication-table"></div>`;
 
-      insertTable([2, 3, 5]);
+      insertMultiplicationTable([2, 3, 5]);
 
       const result = Array.from(document.querySelectorAll('td')).map(
         (node) => node.textContent

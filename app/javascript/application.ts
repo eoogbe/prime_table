@@ -1,4 +1,4 @@
-import insertMultiplicationTable from './multiplicationTable';
+import { insertMultiplicationTable } from './multiplicationTable';
 
 declare global {
   interface Window {

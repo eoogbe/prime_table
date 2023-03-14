@@ -46,7 +46,7 @@ const insertRowHeaderEl = (
  *
  * @param vals - the numbers to multiple. These will be the row and column headers
  */
-export default (vals: number[]): void => {
+export const insertMultiplicationTable = (vals: number[]): void => {
   const table = insertTableEl();
   const headRow = insertTheadTrEl(table);
   const tbody = insertTbodyEl(table);
