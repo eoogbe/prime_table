@@ -1,8 +1,11 @@
-import insertTable, { getRowHeaders, insertMultiples } from '@app/multiplicationTable';
+import insertTable, {
+  getColHeaders,
+  insertMultiples,
+} from '@app/multiplicationTable';
 
 describe('multiplicationTable', () => {
-  describe('getRowHeaders', () => {
-    it('returns the row headers in the table', () => {
+  describe('getColHeaders', () => {
+    it('returns the column headers in the table', () => {
       document.body.innerHTML = `<table>
         <thead>
           <tr>
@@ -25,7 +28,7 @@ describe('multiplicationTable', () => {
         </tbody>
       </table>`;
 
-      const headers = getRowHeaders();
+      const headers = getColHeaders();
 
       expect(headers).toEqual([2, 3, 5]);
     });
@@ -68,7 +71,7 @@ describe('multiplicationTable', () => {
   });
 
   describe('default', () => {
-    it('adds multiples to table in DOM', () => {
+    it('adds multiples of columns to table in DOM', () => {
       document.body.innerHTML = `<table>
         <thead>
           <tr>
@@ -110,5 +113,5 @@ describe('multiplicationTable', () => {
         '25',
       ]);
     });
-  })
+  });
 });

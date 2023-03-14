@@ -1,4 +1,4 @@
-export const getRowHeaders = (): number[] =>
+export const getColHeaders = (): number[] =>
   Array.from(document.querySelectorAll('thead th'))
     .map((node) => node.textContent != null && parseInt(node.textContent, 10))
     .filter((n): n is number => typeof n === 'number');
@@ -15,6 +15,6 @@ export const insertMultiples = (vals: number[]): void => {
 };
 
 export default (): void => {
-  const vals = getRowHeaders();
+  const vals = getColHeaders();
   insertMultiples(vals);
 };
