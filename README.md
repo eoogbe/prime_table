@@ -4,7 +4,7 @@ This web application displays a multiplication table of prime numbers.
 
 ## How to run it
 
-This app uses Ruby v3.1.2
+This app uses Ruby v3.1.2 and runs well in the latest Chrome browser.
 
 To install dependencies, run:
 

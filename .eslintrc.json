@@ -19,7 +19,10 @@
       "env": {
         "jest/globals": true
       },
-      "extends": ["plugin:jest/recommended", "plugin:jest/style"]
+      "extends": ["plugin:jest/recommended", "plugin:jest/style"],
+      "globals": {
+        "document": "readonly"
+      }
     }
   ],
   "parser": "@typescript-eslint/parser",
