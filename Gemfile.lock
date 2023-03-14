@@ -116,6 +116,9 @@ GEM
     guard-rubocop (1.5.0)
       guard (~> 2.0)
       rubocop (< 2.0)
+    hotwire-livereload (1.2.3)
+      listen (>= 3.0.0)
+      rails (>= 6.0.0)
     htmlbeautifier (1.4.2)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
@@ -325,6 +328,7 @@ DEPENDENCIES
   debug
   guard-rspec
   guard-rubocop
+  hotwire-livereload
   htmlbeautifier
   jbuilder
   jsbundling-rails
