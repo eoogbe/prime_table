@@ -8,7 +8,7 @@ module PrimeGenerator
   ##
   # Calculates primes up to +n+ using the Sieve of Eratosthenes.
   #
-  # @param [Integer] n the size of the array
+  # @param [Integer] n the max number
   # @return [Array<Boolean>] for any index k > 2, if index k is +true+ then k is a prime number
   def mark_primes_up_to_n(n)
     result = [true] * (n + 1)
@@ -26,6 +26,11 @@ module PrimeGenerator
     result
   end
 
+  ##
+  # Calculcates the first +n+ prime numbers.
+  #
+  # @param [Integer] n the number of primes
+  # @return [Array<Integer>] the first +n+ prime numbers
   def generate_n_primes(n)
     primes = calc_primes(n)
     filter_primes(primes, n)
