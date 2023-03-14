@@ -10,7 +10,7 @@ RSpec.describe 'PrimeTables' do
   it 'generates a multiplication table for prime numbers' do
     visit root_path
 
-    fill_in 'Number:', with: '3'
+    fill_in 'Number', with: '3'
     click_button 'Generate'
 
     expect(page).to have_content('25')
