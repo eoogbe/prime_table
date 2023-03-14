@@ -15,11 +15,7 @@ class PrimeTableGenerator
   # Generates the prime multiplication table.
   def generate_multiplication_table
     primes = calc_primes
-    values = [1]
-    (2...primes.size).each do |i|
-      values << i if primes[i]
-      break if values.size == n + 1
-    end
+    values = filter_primes(primes)
     values.map do |i|
       values.map do |j|
         i * j
@@ -62,5 +58,13 @@ class PrimeTableGenerator
       cur = n * multiplier
     end
     primes
+  end
+
+  def filter_primes(primes)
+    values = [1]
+    (2...primes.size).each do |i|
+      values << i if primes[i]
+      return values if values.size == n + 1
+    end
   end
 end
