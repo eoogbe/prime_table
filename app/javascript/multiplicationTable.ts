@@ -1,3 +1,8 @@
+/**
+ * Creates a multiplication table in the DOM for the specified `vals`.
+ *
+ * @param vals - the numbers to multiple. These will be the row and column headers
+ */
 export default (vals: number[]): void => {
   const container = document.getElementById('multiplication-table');
   const table = document.createElement('table');
