@@ -10,6 +10,6 @@ class PrimeTableGenerator
   end
 
   def generate
-    Array.new(@n)
+    Array.new(@n, Array.new(@n))
   end
 end
