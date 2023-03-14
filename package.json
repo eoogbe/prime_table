@@ -1,0 +1,26 @@
+{
+  "name": "prime_table",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "esbuild app/javascript/*.* --bundle --sourcemap --outdir=app/assets/builds",
+    "test": "jest",
+    "watch:test": "yarn test --watch"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.21.0",
+    "core-js": "^3.29.1",
+    "esbuild": "^0.17.11",
+    "esbuild-plugin-babel": "^0.2.3",
+    "esbuild-rails": "^1.0.3",
+    "jest": "^29.5.0"
+  },
+  "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "app/javascript"
+    ]
+  }
+}

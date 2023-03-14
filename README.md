@@ -15,7 +15,7 @@ $ bundle install
 To run the development server, run:
 
 ```console
-$ bin/rails server
+$ bin/dev
 ```
 
 Navigate to http://localhost:3000 to view the app.
