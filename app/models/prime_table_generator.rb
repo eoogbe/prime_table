@@ -18,10 +18,10 @@ class PrimeTableGenerator
   end
 
   ##
-  # Generates primes using the Sieve of Eratosthenes.
+  # Calculates primes using the Sieve of Eratosthenes.
   #
   # @return [Array<Boolean>] for any index k > 2, if index k is +true+ then k is a prime number
-  def self.primes(n)
+  def self.calc_primes(n)
     result = [true] * n
 
     (2...n).each do |i|
