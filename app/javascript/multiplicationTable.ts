@@ -1,5 +1,5 @@
 export default (vals: number[]): void => {
-  const container = document.getElementById('prime-table');
+  const container = document.getElementById('multiplication-table');
   const table = document.createElement('table');
   container?.appendChild(table);
   const thead = document.createElement('thead');
