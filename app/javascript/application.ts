@@ -2,7 +2,7 @@ import insertMultiplicationTable from './multiplicationTable';
 
 declare global {
   interface Window {
-    insertMultiplicationTable: () => void;
+    insertMultiplicationTable: (vals: number[]) => void;
   }
 }
 
