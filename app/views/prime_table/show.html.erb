@@ -12,11 +12,10 @@
     </tr>
   </thead>
   <tbody>
-    <% @primes.each do |n| %>
+    <% @primes[1..].each do |n| %>
       <tr>
         <% @primes.each_with_index do |m, i| %>
-          <% if n == 1 %>
-          <% elsif i == 0 %>
+          <% if i == 0 %>
             <th scope="row"><%= n %></th>
           <% else %>
             <td><%= n * m %></td>
