@@ -2,7 +2,7 @@
 <table>
   <thead>
     <tr>
-      <% @prime_table[0].each do |n| %>
+      <% @primes.each do |n| %>
         <% if n == 1 %>
           <td></td>
         <% else %>
@@ -12,13 +12,14 @@
     </tr>
   </thead>
   <tbody>
-    <% @prime_table[1..].each do |row| %>
+    <% @primes.each do |n| %>
       <tr>
-        <% row.each_with_index do |n, i| %>
-          <% if i == 0 %>
+        <% @primes.each_with_index do |m, i| %>
+          <% if n == 1 %>
+          <% elsif i == 0 %>
             <th scope="row"><%= n %></th>
           <% else %>
-            <td><%= n %></td>
+            <td><%= n * m %></td>
           <% end %>
         <% end %>
       </tr>
