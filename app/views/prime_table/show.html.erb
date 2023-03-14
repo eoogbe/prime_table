@@ -13,7 +13,13 @@
   <tbody>
     <% @prime_table[1..].each do |row| %>
       <tr>
-        <th scope="row"><%= row[0] %></th>
+        <% row.each_with_index do |n, i| %>
+          <% if i == 0 %>
+            <th scope="row"><%= n %></th>
+          <% else %>
+            <td><%= n %></td>
+          <% end %>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
