@@ -73,7 +73,7 @@ const primeFormHander = async (e: SubmitEvent): Promise<void> => {
   const n = formData.get('n') as string | null;
   if (n == null || n.length === 0) return;
 
-  const res = await fetch(`/primes.json?n=${n}`);
+  const res = await fetch(`/primes.json?max=${n}`);
   const data = (await res.json()) as number[];
   insertMultiplicationTable(data);
 };
