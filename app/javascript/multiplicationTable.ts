@@ -1,3 +1,11 @@
+/**
+ * The tr of the thead and tbody of a table.
+ */
+export interface TableSections {
+  headRow: HTMLTableRowElement;
+  tbody: HTMLTableSectionElement;
+}
+
 const insertTableEl = (container: Node): HTMLTableElement => {
   const table = document.createElement('table');
   container.appendChild(table);
@@ -20,12 +28,12 @@ const insertTbodyEl = (table: HTMLTableElement): HTMLTableSectionElement => {
   return tbody;
 };
 
-const resetTable = (
-  container: Element
-): {
-  headRow: HTMLTableRowElement;
-  tbody: HTMLTableSectionElement;
-} => {
+/**
+ * Initializes an empty table in the DOM, clearing out any existing elements.
+ * @param container the element to create the table in
+ * @returns the sections of the newly created table
+ */
+export const resetTable = (container: Element): TableSections => {
   container.innerHTML = '';
   const table = insertTableEl(container);
   const headRow = insertTheadTrEl(table);
@@ -57,15 +65,15 @@ const insertRowHeaderEl = (
  * Creates a multiplication table in the DOM for the specified `vals`.
  *
  * @param vals - the numbers to multiple. These will be the row and column headers
+ * @param sections - the head row and body of the multiplication table
  */
-export const insertMultiplicationTable = (vals: number[]): void => {
-  const container = document.getElementById('multiplication-table');
-  if (container == null) return;
-
-  const { headRow, tbody } = resetTable(container);
+export const insertMultiplicationTable = (
+  vals: number[],
+  sections: TableSections
+): void => {
   vals.forEach((n) => {
-    insertColHeaderEl(headRow, n);
-    const row = insertRowHeaderEl(tbody, n);
+    insertColHeaderEl(sections.headRow, n);
+    const row = insertRowHeaderEl(sections.tbody, n);
     vals.forEach((m) => {
       const cell = document.createElement('td');
       cell.textContent = `${n * m}`;
@@ -74,7 +82,10 @@ export const insertMultiplicationTable = (vals: number[]): void => {
   });
 };
 
-const primeFormHander = async (e: SubmitEvent): Promise<void> => {
+const primeFormHander = async (
+  e: SubmitEvent,
+  container: Element
+): Promise<void> => {
   e.preventDefault();
 
   if (e.target == null) return;
@@ -83,16 +94,20 @@ const primeFormHander = async (e: SubmitEvent): Promise<void> => {
   const n = formData.get('n') as string | null;
   if (n == null || n.length === 0) return;
 
+  const tableSections = resetTable(container);
   const res = await fetch(`/primes.json?max=${n}`);
   const data = (await res.json()) as number[];
-  insertMultiplicationTable(data);
+  insertMultiplicationTable(data, tableSections);
 };
 
 /**
  * Adds a submit handler to the form with id "prime-form".
  */
 export const addPrimeFormHandler = (): void => {
+  const container = document.getElementById('multiplication-table');
+  if (container == null) return;
+
   document.getElementById('prime-form')?.addEventListener('submit', (e) => {
-    primeFormHander(e).catch(console.error);
+    primeFormHander(e, container).catch(console.error);
   });
 };
