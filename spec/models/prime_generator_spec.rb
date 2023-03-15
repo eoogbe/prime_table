@@ -18,16 +18,20 @@ RSpec.describe PrimeGenerator do
   end
 
   describe '.generate_n_primes' do
-    it 'returns the first n prime numbers' do
-      result = described_class.generate_n_primes(3)
-
-      expect(result).to eq([2, 3, 5])
+    where(:n, :answer) do
+      [
+        [1, [2]],
+        [3, [2, 3, 5]],
+        [7, [2, 3, 5, 7, 11, 13, 17]]
+      ]
     end
 
-    it 'works for 7' do
-      result = described_class.generate_n_primes(7)
+    with_them do
+      it 'returns the first n prime numbers' do
+        result = described_class.generate_n_primes(n)
 
-      expect(result).to eq([2, 3, 5, 7, 11, 13, 17])
+        expect(result).to eq(answer)
+      end
     end
   end
 end

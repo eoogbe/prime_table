@@ -70,4 +70,5 @@ group :test do
   gem 'webdrivers'
 
   gem 'prop_check'
+  gem 'rspec-parameterized', '>= 1.0.0'
 end
