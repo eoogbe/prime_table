@@ -20,6 +20,19 @@ const insertTbodyEl = (table: HTMLTableElement): HTMLTableSectionElement => {
   return tbody;
 };
 
+const resetTable = (
+  container: Element
+): {
+  headRow: HTMLTableRowElement;
+  tbody: HTMLTableSectionElement;
+} => {
+  container.innerHTML = '';
+  const table = insertTableEl(container);
+  const headRow = insertTheadTrEl(table);
+  const tbody = insertTbodyEl(table);
+  return { headRow, tbody };
+};
+
 const insertColHeaderEl = (row: HTMLTableRowElement, n: number): void => {
   const th = document.createElement('th');
   th.scope = 'col';
@@ -49,10 +62,7 @@ export const insertMultiplicationTable = (vals: number[]): void => {
   const container = document.getElementById('multiplication-table');
   if (container == null) return;
 
-  container.innerHTML = '';
-  const table = insertTableEl(container);
-  const headRow = insertTheadTrEl(table);
-  const tbody = insertTbodyEl(table);
+  const { headRow, tbody } = resetTable(container);
   vals.forEach((n) => {
     insertColHeaderEl(headRow, n);
     const row = insertRowHeaderEl(tbody, n);
