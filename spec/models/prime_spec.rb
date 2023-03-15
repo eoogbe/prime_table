@@ -19,5 +19,11 @@ RSpec.describe Prime do
       )
     end
     # rubocop:enable RSpec/ExampleLength
+
+    it 'gets primes from the database' do
+      result = described_class.between((1...2)).first
+
+      expect(result).not_to be_new_record
+    end
   end
 end

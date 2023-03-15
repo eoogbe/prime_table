@@ -4,6 +4,8 @@
 # The controller for the primes routes.
 class PrimesController < ApplicationController
   def index
-    render json: PrimeGenerator.generate_n_primes(params[:n].to_i)
+    max = params[:n].to_i
+    primes = Prime.between(1..max).map(&:prime)
+    render json: primes
   end
 end
