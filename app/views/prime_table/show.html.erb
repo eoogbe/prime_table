@@ -1,8 +1,3 @@
 <%= render 'prime_table_form' %>
 <div id="multiplication-table"></div>
 <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-<script type="text/javascript">
-  document.addEventListener('DOMContentLoaded', function() {
-    insertMultiplicationTable(<%= @primes %>)
-  })
-</script>
