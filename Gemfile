@@ -33,8 +33,8 @@ gem 'bootsnap', require: false
 # gem "sassc-rails"
 
 gem 'jsbundling-rails'
-
-gem 'hotwire-livereload'
+gem 'sqlite3', '~> 1.4'
+gem 'turbo-rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

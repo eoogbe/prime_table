@@ -116,9 +116,6 @@ GEM
     guard-rubocop (1.5.0)
       guard (~> 2.0)
       rubocop (< 2.0)
-    hotwire-livereload (1.2.3)
-      listen (>= 3.0.0)
-      rails (>= 6.0.0)
     htmlbeautifier (1.4.2)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
@@ -293,9 +290,14 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
+    sqlite3 (1.6.1-x86_64-darwin)
     thor (1.2.1)
     tilt (2.1.0)
     timeout (0.3.2)
+    turbo-rails (1.4.0)
+      actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
+      railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.4.2)
@@ -328,7 +330,6 @@ DEPENDENCIES
   debug
   guard-rspec
   guard-rubocop
-  hotwire-livereload
   htmlbeautifier
   jbuilder
   jsbundling-rails
@@ -342,6 +343,8 @@ DEPENDENCIES
   selenium-webdriver
   solargraph
   sprockets-rails
+  sqlite3 (~> 1.4)
+  turbo-rails
   tzinfo-data
   web-console
   webdrivers

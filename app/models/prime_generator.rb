@@ -17,7 +17,7 @@ module PrimeGenerator
       next unless result[i]
 
       (i..n).each do |j|
-        break unless i * j < n
+        break unless i * j <= n
 
         result[i * j] = false
       end
