@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ##
-# A generator for a multiplication table for prime numbers.
+# A generator for prime numbers.
 module PrimeGenerator
   extend self
 
