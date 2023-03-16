@@ -42,49 +42,35 @@ export const resetTable = (container: Element): TableSections => {
   return { headRow, tbody };
 };
 
-const insertColHeaderEl =
-  (n: number) =>
-  (sections: TableSections): TableSections => {
-    const th = document.createElement('th');
-    th.scope = 'col';
-    th.textContent = `${n}`;
-    sections.headRow.appendChild(th);
-    return sections;
-  };
+const insertColHeaderEl = (n: number, { headRow }: TableSections): void => {
+  const th = document.createElement('th');
+  th.scope = 'col';
+  th.textContent = `${n}`;
+  headRow.appendChild(th);
+};
 
-const insertRowHeaderEl =
-  (n: number) =>
-  (sections: TableSections): TableSections => {
-    const bodyRow = document.createElement('tr');
-    sections.tbody.appendChild(bodyRow);
-    const th = document.createElement('th');
-    th.scope = 'row';
-    th.textContent = `${n}`;
-    bodyRow.appendChild(th);
-    return { ...sections, bodyRow };
-  };
+const insertRowHeaderEl = (
+  n: number,
+  { tbody }: TableSections
+): HTMLTableRowElement => {
+  const bodyRow = document.createElement('tr');
+  tbody.appendChild(bodyRow);
+  const th = document.createElement('th');
+  th.scope = 'row';
+  th.textContent = `${n}`;
+  bodyRow.appendChild(th);
+  return bodyRow;
+};
 
-const insertTdEl =
-  (n: number, m: number) =>
-  (sections: TableSections): TableSections => {
-    const cell = document.createElement('td');
-    cell.textContent = `${n * m}`;
-    sections.bodyRow?.appendChild(cell);
-    return sections;
-  };
-
-const getDomOperations = (
-  vals: number[]
-): Array<(s: TableSections) => TableSections> =>
-  // Linter has false positive here
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
-  vals.flatMap((n) =>
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-    [insertColHeaderEl(n), insertRowHeaderEl(n)].concat(
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      vals.map((m) => insertTdEl(n, m))
-    )
-  );
+const insertTdEl = (
+  n: number,
+  m: number,
+  bodyRow: HTMLTableRowElement
+): void => {
+  const cell = document.createElement('td');
+  cell.textContent = `${n * m}`;
+  bodyRow?.appendChild(cell);
+};
 
 const wait = new Promise((resolve) => window.requestAnimationFrame(resolve));
 
@@ -98,13 +84,16 @@ export const insertMultiplicationTable = async (
   vals: number[],
   sections: TableSections
 ): Promise<void> => {
-  const operations = getDomOperations(vals);
-  let prev = sections;
-  for (let i = 0; i < operations.length; ++i) {
-    const op = operations[i] as (s: TableSections) => TableSections;
-    prev = { ...prev, ...op(prev) };
-    if (i > 0 && i % 100 === 0) {
-      await wait;
+  for (let i = 0; i < vals.length; ++i) {
+    const n = vals[i] as number;
+    insertColHeaderEl(n, sections);
+    const bodyRow = insertRowHeaderEl(n, sections);
+    for (let j = 0; j < vals.length; ++j) {
+      const m = vals[j] as number;
+      insertTdEl(n, m, bodyRow);
+      if (j > 0 && j % 100 === 0) {
+        await wait;
+      }
     }
   }
 };
