@@ -4,12 +4,18 @@ This web application displays a multiplication table of prime numbers.
 
 ## How to run it
 
-This app uses Ruby v3.1.2 and runs well in the latest Chrome browser. The database is PostgreSQL.
+This app uses Ruby v3.1.2 and runs well in the latest Chrome browser.
 
 To install dependencies, run:
 
 ```console
 $ bundle
+```
+
+The database is PostgreSQL. To create the database, run:
+
+```console
+$ bin/rake db:create db:schema:load
 ```
 
 To run the development server:
