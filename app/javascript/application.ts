@@ -1,3 +1,3 @@
-import { addPrimeFormHandler } from './multiplicationTable';
+import { addPrimeFormHandler } from './primeTable';
 
 addPrimeFormHandler();

@@ -75,13 +75,16 @@ const insertTdEl =
 
 const getDomOperations = (
   vals: number[]
-): Array<(s: TableSections) => TableSections> => {
-  return vals.flatMap((n) =>
+): Array<(s: TableSections) => TableSections> =>
+  // Linter has false positive here
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-return
+  vals.flatMap((n) =>
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     [insertColHeaderEl(n), insertRowHeaderEl(n)].concat(
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       vals.map((m) => insertTdEl(n, m))
     )
   );
-};
 
 const wait = new Promise((resolve) => window.requestAnimationFrame(resolve));
 

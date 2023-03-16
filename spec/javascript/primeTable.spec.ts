@@ -1,7 +1,4 @@
-import {
-  insertMultiplicationTable,
-  resetTable,
-} from '@app/multiplicationTable';
+import { insertMultiplicationTable, resetTable } from '@app/primeTable';
 
 describe('multiplicationTable', () => {
   describe('resetTable', () => {
