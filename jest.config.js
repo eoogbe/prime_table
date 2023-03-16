@@ -6,4 +6,6 @@ module.exports = {
   moduleNameMapper: {
     '^@app/(.*)$': '<rootDir>/app/javascript/$1',
   },
+  automock: false,
+  setupFiles: ['./config/setupJest.js'],
 };

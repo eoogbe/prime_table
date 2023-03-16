@@ -98,12 +98,17 @@ export const insertMultiplicationTable = async (
   }
 };
 
-const generatePrimeTable = async (
+/**
+ * Generates a multiplication table of prime numbers.
+ * @param n - the number of prime numbers
+ * @param container - the DOM element to insert the table into
+ */
+export const generatePrimeTable = async (
   n: number,
   container: Element
 ): Promise<void> => {
   const tableSections = resetTable(container);
-  const res = await fetch(`/primes.json?max=${n}`);
+  const res = await fetch(`http://localhost:3000/primes.json?max=${n}`);
   const data = (await res.json()) as number[];
   await insertMultiplicationTable(data, tableSections);
 };

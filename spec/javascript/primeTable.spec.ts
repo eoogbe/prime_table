@@ -1,6 +1,11 @@
-import { insertMultiplicationTable, resetTable } from '@app/primeTable';
+import fetchMock from 'jest-fetch-mock';
+import {
+  generatePrimeTable,
+  insertMultiplicationTable,
+  resetTable,
+} from '@app/primeTable';
 
-describe('multiplicationTable', () => {
+describe('primeTable', () => {
   describe('resetTable', () => {
     it('creates a table', () => {
       document.body.innerHTML = `<div id="multiplication-table"></div>`;
@@ -87,6 +92,20 @@ describe('multiplicationTable', () => {
         '15',
         '25',
       ]);
+    });
+  });
+
+  describe('generatePrimeTable', () => {
+    it('fetches the primes', async () => {
+      document.body.innerHTML = `<div id="multiplication-table"></div>`;
+      const container = document.getElementById(
+        'multiplication-table'
+      ) as Element;
+      fetchMock.mockResponse(JSON.stringify([2, 3, 5]));
+
+      await generatePrimeTable(3, container);
+
+      expect(fetchMock).toHaveBeenCalled();
     });
   });
 });
