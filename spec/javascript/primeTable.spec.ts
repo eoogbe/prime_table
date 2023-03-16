@@ -50,7 +50,7 @@ describe('primeTable', () => {
       const headRow = document.querySelector('thead tr') as HTMLTableRowElement;
       const tbody = document.querySelector('tbody') as HTMLTableSectionElement;
 
-      await insertMultiplicationTable([2, 3, 5], { headRow, tbody });
+      await insertMultiplicationTable([2, 3, 5], 0, { headRow, tbody });
 
       const result = Array.from(document.querySelectorAll('th')).map(
         (node) => node.textContent
@@ -74,7 +74,7 @@ describe('primeTable', () => {
       const headRow = document.querySelector('thead tr') as HTMLTableRowElement;
       const tbody = document.querySelector('tbody') as HTMLTableSectionElement;
 
-      await insertMultiplicationTable([2, 3, 5], { headRow, tbody });
+      await insertMultiplicationTable([2, 3, 5], 0, { headRow, tbody });
 
       const result = Array.from(document.querySelectorAll('td')).map(
         (node) => node.textContent

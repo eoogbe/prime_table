@@ -4,7 +4,6 @@
 export interface TableSections {
   headRow: HTMLTableRowElement;
   tbody: HTMLTableSectionElement;
-  bodyRow?: HTMLTableRowElement;
 }
 
 const insertTableEl = (container: Node): HTMLTableElement => {
@@ -13,7 +12,7 @@ const insertTableEl = (container: Node): HTMLTableElement => {
   return table;
 };
 
-const insertTheadTrEl = (table: HTMLTableElement): HTMLTableRowElement => {
+const insertTheadTrEl = (table: Node): HTMLTableRowElement => {
   const thead = document.createElement('thead');
   table.appendChild(thead);
   const row = document.createElement('tr');
@@ -23,7 +22,7 @@ const insertTheadTrEl = (table: HTMLTableElement): HTMLTableRowElement => {
   return row;
 };
 
-const insertTbodyEl = (table: HTMLTableElement): HTMLTableSectionElement => {
+const insertTbodyEl = (table: Node): HTMLTableSectionElement => {
   const tbody = document.createElement('tbody');
   table.appendChild(tbody);
   return tbody;
@@ -42,17 +41,14 @@ export const resetTable = (container: Element): TableSections => {
   return { headRow, tbody };
 };
 
-const insertColHeaderEl = (n: number, { headRow }: TableSections): void => {
+const insertColHeaderEl = (n: number, headRow: Node): void => {
   const th = document.createElement('th');
   th.scope = 'col';
   th.textContent = `${n}`;
   headRow.appendChild(th);
 };
 
-const insertRowHeaderEl = (
-  n: number,
-  { tbody }: TableSections
-): HTMLTableRowElement => {
+const insertRowHeaderEl = (n: number, tbody: Node): HTMLTableRowElement => {
   const bodyRow = document.createElement('tr');
   tbody.appendChild(bodyRow);
   const th = document.createElement('th');
@@ -62,17 +58,57 @@ const insertRowHeaderEl = (
   return bodyRow;
 };
 
-const insertTdEl = (
-  n: number,
-  m: number,
-  bodyRow: HTMLTableRowElement
-): void => {
+const insertTdEl = (n: number, m: number, bodyRow: Node): void => {
   const cell = document.createElement('td');
   cell.textContent = `${n * m}`;
   bodyRow?.appendChild(cell);
 };
 
+const BATCH_SIZE = 100;
 const wait = new Promise((resolve) => window.requestAnimationFrame(resolve));
+
+const addCellsToExistingRow = async ({
+  i,
+  start,
+  vals,
+  sections,
+}: {
+  i: number;
+  start: number;
+  vals: number[];
+  sections: TableSections;
+}): Promise<void> => {
+  const n = vals[i] as number;
+  const bodyRow = sections.tbody.querySelector(
+    `tr:nth-child(${i + 1})`
+  ) as HTMLTableRowElement;
+  for (let j = start; j < vals.length; ++j) {
+    const m = vals[j] as number;
+    insertTdEl(n, m, bodyRow);
+    if (j > 0 && j % BATCH_SIZE === 0) {
+      await wait;
+    }
+  }
+};
+
+const addBodyRow = async ({
+  i,
+  vals,
+  sections,
+}: {
+  i: number;
+  vals: number[];
+  sections: TableSections;
+}): Promise<void> => {
+  const n = vals[i] as number;
+  insertColHeaderEl(n, sections.headRow);
+  const bodyRow = insertRowHeaderEl(n, sections.tbody);
+  for (let j = 0; j < vals.length; ++j) {
+    const m = vals[j] as number;
+    insertTdEl(n, m, bodyRow);
+    await wait;
+  }
+};
 
 /**
  * Creates a multiplication table in the DOM for the specified `vals`.
@@ -82,20 +118,35 @@ const wait = new Promise((resolve) => window.requestAnimationFrame(resolve));
  */
 export const insertMultiplicationTable = async (
   vals: number[],
+  min: number,
   sections: TableSections
 ): Promise<void> => {
   for (let i = 0; i < vals.length; ++i) {
-    const n = vals[i] as number;
-    insertColHeaderEl(n, sections);
-    const bodyRow = insertRowHeaderEl(n, sections);
-    for (let j = 0; j < vals.length; ++j) {
-      const m = vals[j] as number;
-      insertTdEl(n, m, bodyRow);
-      if (j > 0 && j % 100 === 0) {
-        await wait;
-      }
+    if (i < min) {
+      await addCellsToExistingRow({ i, vals, sections, start: min });
+    } else {
+      await addBodyRow({ i, vals, sections });
     }
   }
+};
+
+const generateBatch = async ({
+  vals,
+  min,
+  max,
+  tableSections,
+}: {
+  vals: number[];
+  min: number;
+  max: number;
+  tableSections: TableSections;
+}): Promise<void> => {
+  const res = await fetch(
+    `http://localhost:3000/primes.json?min=${min}&max=${max}`
+  );
+  const data = (await res.json()) as number[];
+  vals.push(...data);
+  await insertMultiplicationTable(vals, min - 1, tableSections);
 };
 
 /**
@@ -108,9 +159,14 @@ export const generatePrimeTable = async (
   container: Element
 ): Promise<void> => {
   const tableSections = resetTable(container);
-  const res = await fetch(`http://localhost:3000/primes.json?max=${n}`);
-  const data = (await res.json()) as number[];
-  await insertMultiplicationTable(data, tableSections);
+  const vals: number[] = [];
+  let min = 1;
+  let max = Math.min(n, BATCH_SIZE);
+  while (min <= n) {
+    await generateBatch({ min, max, vals, tableSections });
+    min = max + 1;
+    max = Math.min(n, max + BATCH_SIZE);
+  }
 };
 
 const primeFormHander = async (
