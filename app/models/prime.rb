@@ -9,9 +9,12 @@ class Prime < ApplicationRecord
 
     max = range.max
     min = result.size + range.min - 1
-    PrimeGenerator.generate_n_primes(max)[min...max].each_with_index do |prime, i|
-      create(n: i + min + 1, prime:)
+    addl = PrimeGenerator.generate_n_primes(max)[min...max].each_with_index.map do |prime, i|
+      { n: i + min + 1, prime: }
     end
+    # rubocop:disable Rails/SkipsModelValidations
+    Prime.insert_all(addl)
+    # rubocop:enable Rails/SkipsModelValidations
 
     result
   end
