@@ -6,6 +6,10 @@ import {
 } from '@app/primeTable';
 
 describe('primeTable', () => {
+  beforeEach(() => {
+    fetchMock.resetMocks();
+  });
+
   describe('resetTable', () => {
     it('creates a table', () => {
       document.body.innerHTML = `<div id="multiplication-table"></div>`;
