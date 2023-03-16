@@ -83,29 +83,27 @@ const getDomOperations = (
   );
 };
 
+const wait = new Promise((resolve) => window.requestAnimationFrame(resolve));
+
 /**
  * Creates a multiplication table in the DOM for the specified `vals`.
  *
  * @param vals - the numbers to multiple. These will be the row and column headers
  * @param sections - the head row and body of the multiplication table
  */
-export const insertMultiplicationTable = (
+export const insertMultiplicationTable = async (
   vals: number[],
   sections: TableSections
-): void => {
+): Promise<void> => {
   const operations = getDomOperations(vals);
-  let idx = 0;
   let prev = sections;
-  const batchUpdates = (): void => {
-    operations.slice(idx, idx + 100).forEach((op) => {
-      prev = { ...prev, ...op(prev) };
-    });
-    idx += 100;
-    if (idx < operations.length) {
-      window.requestAnimationFrame(batchUpdates);
+  for (let i = 0; i < operations.length; ++i) {
+    const op = operations[i] as (s: TableSections) => TableSections;
+    prev = { ...prev, ...op(prev) };
+    if (i > 0 && i % 100 === 0) {
+      await wait;
     }
-  };
-  window.requestAnimationFrame(batchUpdates);
+  }
 };
 
 const generatePrimeTable = async (
@@ -115,7 +113,7 @@ const generatePrimeTable = async (
   const tableSections = resetTable(container);
   const res = await fetch(`/primes.json?max=${n}`);
   const data = (await res.json()) as number[];
-  insertMultiplicationTable(data, tableSections);
+  await insertMultiplicationTable(data, tableSections);
 };
 
 const primeFormHander = async (

@@ -33,7 +33,7 @@ describe('multiplicationTable', () => {
       spiedRaf.mockRestore();
     });
 
-    it('adds values as headers', () => {
+    it('adds values as headers', async () => {
       document.body.innerHTML = `<div id="multiplication-table">
           <table>
             <thead>
@@ -48,7 +48,7 @@ describe('multiplicationTable', () => {
       const headRow = document.querySelector('thead tr') as HTMLTableRowElement;
       const tbody = document.querySelector('tbody') as HTMLTableSectionElement;
 
-      insertMultiplicationTable([2, 3, 5], { headRow, tbody });
+      await insertMultiplicationTable([2, 3, 5], { headRow, tbody });
 
       const result = Array.from(document.querySelectorAll('th')).map(
         (node) => node.textContent
@@ -57,7 +57,7 @@ describe('multiplicationTable', () => {
       expect(result).toEqual(['2', '3', '5', '2', '3', '5']);
     });
 
-    it('adds multiples of the values to the DOM', () => {
+    it('adds multiples of the values to the DOM', async () => {
       document.body.innerHTML = `<div id="multiplication-table">
           <table>
             <thead>
@@ -72,7 +72,7 @@ describe('multiplicationTable', () => {
       const headRow = document.querySelector('thead tr') as HTMLTableRowElement;
       const tbody = document.querySelector('tbody') as HTMLTableSectionElement;
 
-      insertMultiplicationTable([2, 3, 5], { headRow, tbody });
+      await insertMultiplicationTable([2, 3, 5], { headRow, tbody });
 
       const result = Array.from(document.querySelectorAll('td')).map(
         (node) => node.textContent
