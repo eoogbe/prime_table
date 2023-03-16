@@ -7,7 +7,9 @@ describe('multiplicationTable', () => {
   describe('resetTable', () => {
     it('creates a table', () => {
       document.body.innerHTML = `<div id="multiplication-table"></div>`;
-      const container = document.getElementById('multiplication-table') as Element;
+      const container = document.getElementById(
+        'multiplication-table'
+      ) as Element;
 
       resetTable(container);
 
@@ -16,6 +18,21 @@ describe('multiplicationTable', () => {
   });
 
   describe('insertMultiplicationTable', () => {
+    let spiedRaf: jest.Spied<typeof window.requestAnimationFrame>;
+
+    beforeEach(() => {
+      spiedRaf = jest
+        .spyOn(window, 'requestAnimationFrame')
+        .mockImplementation((cb: FrameRequestCallback) => {
+          cb(0); // eslint-disable-line n/no-callback-literal
+          return 0;
+        });
+    });
+
+    afterEach(() => {
+      spiedRaf.mockRestore();
+    });
+
     it('adds values as headers', () => {
       document.body.innerHTML = `<div id="multiplication-table">
           <table>

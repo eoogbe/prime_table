@@ -1,9 +1,10 @@
 /**
- * The tr of the thead and tbody of a table.
+ * Sections of the table needed to insert cell data.
  */
 export interface TableSections {
   headRow: HTMLTableRowElement;
   tbody: HTMLTableSectionElement;
+  bodyRow?: HTMLTableRowElement;
 }
 
 const insertTableEl = (container: Node): HTMLTableElement => {
@@ -41,24 +42,45 @@ export const resetTable = (container: Element): TableSections => {
   return { headRow, tbody };
 };
 
-const insertColHeaderEl = (row: HTMLTableRowElement, n: number): void => {
-  const th = document.createElement('th');
-  th.scope = 'col';
-  th.textContent = `${n}`;
-  row.appendChild(th);
-};
+const insertColHeaderEl =
+  (n: number) =>
+  (sections: TableSections): TableSections => {
+    const th = document.createElement('th');
+    th.scope = 'col';
+    th.textContent = `${n}`;
+    sections.headRow.appendChild(th);
+    return sections;
+  };
 
-const insertRowHeaderEl = (
-  tbody: HTMLTableSectionElement,
-  n: number
-): HTMLTableRowElement => {
-  const row = document.createElement('tr');
-  tbody.appendChild(row);
-  const th = document.createElement('th');
-  th.scope = 'row';
-  th.textContent = `${n}`;
-  row.appendChild(th);
-  return row;
+const insertRowHeaderEl =
+  (n: number) =>
+  (sections: TableSections): TableSections => {
+    const bodyRow = document.createElement('tr');
+    sections.tbody.appendChild(bodyRow);
+    const th = document.createElement('th');
+    th.scope = 'row';
+    th.textContent = `${n}`;
+    bodyRow.appendChild(th);
+    return { ...sections, bodyRow };
+  };
+
+const insertTdEl =
+  (n: number, m: number) =>
+  (sections: TableSections): TableSections => {
+    const cell = document.createElement('td');
+    cell.textContent = `${n * m}`;
+    sections.bodyRow?.appendChild(cell);
+    return sections;
+  };
+
+const getDomOperations = (
+  vals: number[]
+): Array<(s: TableSections) => TableSections> => {
+  return vals.flatMap((n) =>
+    [insertColHeaderEl(n), insertRowHeaderEl(n)].concat(
+      vals.map((m) => insertTdEl(n, m))
+    )
+  );
 };
 
 /**
@@ -71,15 +93,19 @@ export const insertMultiplicationTable = (
   vals: number[],
   sections: TableSections
 ): void => {
-  vals.forEach((n) => {
-    insertColHeaderEl(sections.headRow, n);
-    const row = insertRowHeaderEl(sections.tbody, n);
-    vals.forEach((m) => {
-      const cell = document.createElement('td');
-      cell.textContent = `${n * m}`;
-      row?.appendChild(cell);
+  const operations = getDomOperations(vals);
+  let idx = 0;
+  let prev = sections;
+  const batchUpdates = (): void => {
+    operations.slice(idx, idx + 100).forEach((op) => {
+      prev = { ...prev, ...op(prev) };
     });
-  });
+    idx += 100;
+    if (idx < operations.length) {
+      window.requestAnimationFrame(batchUpdates);
+    }
+  };
+  window.requestAnimationFrame(batchUpdates);
 };
 
 const primeFormHander = async (
