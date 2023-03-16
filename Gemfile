@@ -33,7 +33,7 @@ gem 'bootsnap', require: false
 # gem "sassc-rails"
 
 gem 'jsbundling-rails'
-gem 'sqlite3', '~> 1.4'
+gem 'pg'
 gem 'turbo-rails'
 
 group :development, :test do
