@@ -108,6 +108,16 @@ export const insertMultiplicationTable = (
   window.requestAnimationFrame(batchUpdates);
 };
 
+const generatePrimeTable = async (
+  n: number,
+  container: Element
+): Promise<void> => {
+  const tableSections = resetTable(container);
+  const res = await fetch(`/primes.json?max=${n}`);
+  const data = (await res.json()) as number[];
+  insertMultiplicationTable(data, tableSections);
+};
+
 const primeFormHander = async (
   e: SubmitEvent,
   container: Element
@@ -120,10 +130,7 @@ const primeFormHander = async (
   const n = formData.get('n') as string | null;
   if (n == null || n.length === 0) return;
 
-  const tableSections = resetTable(container);
-  const res = await fetch(`/primes.json?max=${n}`);
-  const data = (await res.json()) as number[];
-  insertMultiplicationTable(data, tableSections);
+  await generatePrimeTable(parseInt(n, 10), container);
 };
 
 /**
