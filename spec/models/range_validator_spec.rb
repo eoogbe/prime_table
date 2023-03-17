@@ -10,4 +10,12 @@ RSpec.describe RangeValidator do
       expect(validator.range).to eq(2..3)
     end
   end
+
+  describe '#valid?' do
+    it 'when min and max valid returns true' do
+      validator = described_class.new('2', '3')
+
+      expect(validator).to be_valid
+    end
+  end
 end

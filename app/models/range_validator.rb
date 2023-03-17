@@ -3,6 +3,8 @@
 ##
 # Validator for a min and max value that can go in a range of positive numbers.
 class RangeValidator
+  include ActiveModel::Validations
+
   attr_reader :min, :max
 
   ##
