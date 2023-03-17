@@ -8,8 +8,8 @@ class RangeValidator
   attr_reader :min, :max
 
   validates :max, numericality: { only_integer: true, greater_than: 0 }
-  validates :min, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
-  validates :min, numericality: { less_than_or_equal_to: :max, allow_nil: true },
+  validates :min, numericality: { only_integer: true, greater_than: 0 }
+  validates :min, numericality: { less_than_or_equal_to: :max },
                   unless: -> { errors.include?(:max) }
 
   ##
@@ -17,7 +17,7 @@ class RangeValidator
   # @param [String, nil] min the beginning of the range
   # @param [String] max the end of the range inclusive
   def initialize(min, max)
-    @min = min
+    @min = min || '1'
     @max = max
   end
 

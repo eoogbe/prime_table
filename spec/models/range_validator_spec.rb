@@ -9,6 +9,12 @@ RSpec.describe RangeValidator do
 
       expect(validator.range).to eq(2..3)
     end
+
+    it 'when min nil begins range at 1' do
+      validator = described_class.new(nil, '3')
+
+      expect(validator.range).to eq(1..3)
+    end
   end
 
   describe 'validation' do
