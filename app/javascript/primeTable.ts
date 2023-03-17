@@ -8,6 +8,7 @@ export interface TableSections {
 
 const insertTableEl = (container: Node): HTMLTableElement => {
   const table = document.createElement('table');
+  table.className = 'table';
   container.appendChild(table);
   return table;
 };
@@ -16,8 +17,10 @@ const insertTheadTrEl = (table: Node): HTMLTableRowElement => {
   const thead = document.createElement('thead');
   table.appendChild(thead);
   const row = document.createElement('tr');
+  row.className = 'table__row';
   thead.appendChild(row);
   const dummyCell = document.createElement('td');
+  dummyCell.className = 'table__cell';
   row.appendChild(dummyCell);
   return row;
 };
@@ -43,6 +46,7 @@ export const resetTable = (container: Element): TableSections => {
 
 const insertColHeaderEl = (n: number, headRow: Node): void => {
   const th = document.createElement('th');
+  th.className = 'table__cell table__cell--head';
   th.scope = 'col';
   th.textContent = `${n}`;
   headRow.appendChild(th);
@@ -50,8 +54,10 @@ const insertColHeaderEl = (n: number, headRow: Node): void => {
 
 const insertRowHeaderEl = (n: number, tbody: Node): HTMLTableRowElement => {
   const bodyRow = document.createElement('tr');
+  bodyRow.className = 'table__row';
   tbody.appendChild(bodyRow);
   const th = document.createElement('th');
+  th.className = 'table__cell table__cell--head';
   th.scope = 'row';
   th.textContent = `${n}`;
   bodyRow.appendChild(th);
@@ -60,6 +66,7 @@ const insertRowHeaderEl = (n: number, tbody: Node): HTMLTableRowElement => {
 
 const insertTdEl = (n: number, m: number, bodyRow: Node): void => {
   const cell = document.createElement('td');
+  cell.className = 'table__cell';
   cell.textContent = `${n * m}`;
   bodyRow?.appendChild(cell);
 };

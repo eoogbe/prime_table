@@ -4,6 +4,8 @@ This web application displays a multiplication table of prime numbers.
 
 It takes in a numeric input n from the user an outputs a multiplication table of n prime numbers.
 
+![Screenshot](./screenshot.png)
+
 ## How to run it
 
 This app uses Ruby v3.1.2 and runs well in the latest Chrome browser.
@@ -48,8 +50,7 @@ in idomatic places.
 ## What I would do if I had more time
 
 - Input validation (Issue #1)
-- CSS styling (Issue #2)
-- Link to the next prime table from each number in the table (Issue #3)
+- Convert each number in the table into a link to a new prime table for that number as n (Issue #3)
 
 ## Structure
 
