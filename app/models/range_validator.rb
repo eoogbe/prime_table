@@ -7,7 +7,7 @@ class RangeValidator
 
   attr_reader :min, :max
 
-  validates :min, numericality: { only_integer: true }
+  validates :min, numericality: { only_integer: true, greater_than: 0 }
 
   ##
   # Creates a new validator.
