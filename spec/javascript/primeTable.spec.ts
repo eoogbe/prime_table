@@ -3,6 +3,7 @@ import {
   generatePrimeTable,
   insertMultiplicationTable,
   resetTable,
+  validatePrimeForm,
 } from '@app/primeTable';
 
 describe('primeTable', () => {
@@ -110,6 +111,14 @@ describe('primeTable', () => {
       await generatePrimeTable(3, container);
 
       expect(fetchMock).toHaveBeenCalled();
+    });
+  });
+
+  describe('validatePrimeForm', () => {
+    it('when n valid parses n as an int', () => {
+      const n = validatePrimeForm('2');
+
+      expect(n).toBe(2);
     });
   });
 });

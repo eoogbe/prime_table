@@ -176,6 +176,11 @@ export const generatePrimeTable = async (
   }
 };
 
+export const validatePrimeForm = (val: string | null): number | null => {
+  if (val == null || val.length === 0) return null;
+  return parseInt(val, 10);
+};
+
 const primeFormHander = async (
   e: SubmitEvent,
   container: Element
