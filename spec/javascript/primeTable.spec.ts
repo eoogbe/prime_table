@@ -4,7 +4,8 @@ import {
   insertMultiplicationTable,
   resetTable,
   validatePrimeForm,
-  updateNFieldError,
+  addNFieldError,
+  removeNFieldError,
 } from '@app/primeTable';
 
 describe('primeTable', () => {
@@ -133,24 +134,46 @@ describe('primeTable', () => {
     });
   });
 
-  describe('updateNFieldError', () => {
-    it('when valid removes error', () => {
+  describe('addNFieldError', () => {
+    beforeAll(() => {
+      document.body.innerHTML = `<div id="n-field"><input id="n" class="form__input"></div>`;
+    });
+
+    it('adds error message', () => {
+      expect(document.getElementById('n-error')).toBeNull();
+
+      addNFieldError();
+
+      expect(document.getElementById('n-error')).not.toBeNull();
+    });
+    it('adds error class to input', () => {
+      addNFieldError();
+
+      expect(document.getElementById('n')?.className).toBe(
+        'form__input form__input--error'
+      );
+    });
+  });
+
+  describe('removeNFieldError', () => {
+    beforeAll(() => {
       document.body.innerHTML = `<div id="n-field">
-          <div id="n-error">Must be a positive integer</div>
-        </div>`;
+        <input id="n" class="form__input form__input--error">
+        <div id="n-error">Must be a positive integer</div>
+      </div>`;
+    });
+
+    it('removes error', () => {
       expect(document.getElementById('n-error')).not.toBeNull();
 
-      updateNFieldError(true);
+      removeNFieldError();
 
       expect(document.getElementById('n-error')).toBeNull();
     });
-    it('when invalid adds error', () => {
-      document.body.innerHTML = `<div id="n-field"></div>`;
-      expect(document.getElementById('n-error')).toBeNull();
+    it('removes error class from input', () => {
+      removeNFieldError();
 
-      updateNFieldError(false);
-
-      expect(document.getElementById('n-error')).not.toBeNull();
+      expect(document.getElementById('n')?.className).toBe('form__input');
     });
   });
 });

@@ -74,6 +74,22 @@ body {
   outline: 2px solid #3f51b5;
 }
 
+.form__input--error {
+  border-color: #f44336;
+}
+
+.form__input--error:focus {
+  outline-color: #f44336;
+}
+
+.form__field-error {
+  color: #f44336;
+  font-size: 0.75rem;
+  letter-spacing: 0.03333em;
+  line-height: 1.66;
+  margin-top: 0.250em;
+}
+
 .button {
   background: #fff;
   border: 0;
