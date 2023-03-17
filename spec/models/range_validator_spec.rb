@@ -35,6 +35,7 @@ RSpec.describe RangeValidator do
       validator = described_class.new('bad', '3')
 
       expect(validator).not_to be_valid
+      expect(validator.errors[:min]).to have_attributes(size: 1)
     end
 
     it 'when min is less than 1 is not valid' do

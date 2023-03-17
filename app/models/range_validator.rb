@@ -10,7 +10,7 @@ class RangeValidator
   validates :max, numericality: { only_integer: true, greater_than: 0 }
   validates :min, numericality: { only_integer: true, greater_than: 0 }
   validates :min, numericality: { less_than_or_equal_to: :max },
-                  unless: -> { errors.include?(:max) }
+                  unless: -> { errors.include?(:max) || errors.of_kind?(:min, :not_a_number) }
 
   ##
   # Creates a new validator.
