@@ -120,5 +120,15 @@ describe('primeTable', () => {
 
       expect(n).toBe(2);
     });
+    it('when n null does nothing', () => {
+      const n = validatePrimeForm(null);
+
+      expect(n).toBeNull();
+    });
+    it('when n blank does nothing', () => {
+      const n = validatePrimeForm('');
+
+      expect(n).toBeNull();
+    });
   });
 });
