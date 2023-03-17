@@ -17,5 +17,11 @@ RSpec.describe RangeValidator do
 
       expect(validator).to be_valid
     end
+
+    it 'when min is not a number returns false' do
+      validator = described_class.new('bad', '3')
+
+      expect(validator).not_to be_valid
+    end
   end
 end

@@ -7,6 +7,8 @@ class RangeValidator
 
   attr_reader :min, :max
 
+  validates :min, numericality: { only_integer: true }
+
   ##
   # Creates a new validator.
   # @param [String, nil] min the beginning of the range
