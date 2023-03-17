@@ -120,8 +120,13 @@ describe('primeTable', () => {
 
       expect(n).toBe(2);
     });
-    it('when n not an integer returns false', () => {
+    it('when n not an integer returns null', () => {
       const n = validatePrimeForm('bad');
+
+      expect(n).toBeNull();
+    });
+    it('when n is less than 1 returns null', () => {
+      const n = validatePrimeForm('0');
 
       expect(n).toBeNull();
     });

@@ -184,6 +184,7 @@ export const generatePrimeTable = async (
 export const validatePrimeForm = (value: string): number | null => {
   const n = parseInt(value, 10);
   if (isNaN(n)) return null;
+  if (n < 1) return null;
   return n;
 };
 
