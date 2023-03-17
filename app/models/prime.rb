@@ -4,6 +4,10 @@
 # Represents the nth prime number.
 class Prime < ApplicationRecord
   class << self
+    ##
+    # Finds or generates primes with n contained in +range+.
+    # @param [Range] range the range of n values
+    # @return [ActiveRecord::Relation] primes within the range
     def between(range)
       result = where(n: range).order(:n)
       return result if result.size == range.size

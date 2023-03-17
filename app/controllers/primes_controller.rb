@@ -4,9 +4,12 @@
 # The controller for the primes routes.
 class PrimesController < ApplicationController
   def index
-    min = [params[:min].to_i, 1].max
-    max = params[:max].to_i
-    primes = Prime.between(min..max).map(&:prime)
-    render json: primes
+    validator = RangeValidator.new(params[:min], params[:max])
+    if validator.valid?
+      primes = Prime.between(validator.range).map(&:prime)
+      render json: primes
+    else
+      render json: validator.errors.as_json, status: :bad_request
+    end
   end
 end

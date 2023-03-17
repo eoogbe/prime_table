@@ -86,9 +86,9 @@ const addCellsToExistingRow = async ({
   sections: TableSections;
 }): Promise<void> => {
   const n = vals[i] as number;
-  const bodyRow = sections.tbody.querySelector(
-    `tr:nth-child(${i + 1})`
-  ) as HTMLTableRowElement;
+  const bodyRow = sections.tbody.querySelector(`tr:nth-child(${i + 1})`);
+  if (bodyRow == null) return;
+
   for (let j = start; j < vals.length; ++j) {
     const m = vals[j] as number;
     insertTdEl(n, m, bodyRow);
@@ -176,6 +176,46 @@ export const generatePrimeTable = async (
   }
 };
 
+/**
+ * Parses `value` as a positive integer if valid, otherwise returns `null`.
+ * @param value the value to parse
+ * @return the parsed value, or `null` if the value is invalid
+ */
+export const validatePrimeForm = (value: string): number | null => {
+  const n = parseInt(value, 10);
+  if (isNaN(n)) return null;
+  if (n < 1) return null;
+  return n;
+};
+
+/**
+ * Adds the error message for the n field.
+ */
+export const addNFieldError = (): void => {
+  const input = document.getElementById('n');
+  if (input != null) {
+    input.className = 'form__input form__input--error';
+  }
+  if (document.getElementById('n-error') == null) {
+    const errorText = document.createElement('div');
+    errorText.id = 'n-error';
+    errorText.className = 'form__field-error';
+    errorText.textContent = 'Must be a positive integer';
+    document.getElementById('n-field')?.appendChild(errorText);
+  }
+};
+
+/**
+ * Removes the error message for the n field.
+ */
+export const removeNFieldError = (): void => {
+  const input = document.getElementById('n');
+  if (input != null) {
+    input.className = 'form__input';
+  }
+  document.getElementById('n-error')?.remove();
+};
+
 const primeFormHander = async (
   e: SubmitEvent,
   container: Element
@@ -185,10 +225,16 @@ const primeFormHander = async (
   if (e.target == null) return;
 
   const formData = new FormData(e.target as HTMLFormElement);
-  const n = formData.get('n') as string | null;
-  if (n == null || n.length === 0) return;
+  const value = formData.get('n');
+  if (value == null || typeof value !== 'string' || value.length === 0) return;
 
-  await generatePrimeTable(parseInt(n, 10), container);
+  const n = validatePrimeForm(value);
+  if (n == null) {
+    addNFieldError();
+  } else {
+    removeNFieldError();
+    await generatePrimeTable(n, container);
+  }
 };
 
 /**

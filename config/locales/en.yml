@@ -30,5 +30,10 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  errors:
+    attributes:
+      min:
+        less_than_or_equal_to:
+          must be less than or equal to max
   generate: Generate
   number: Number

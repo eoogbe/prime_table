@@ -3,6 +3,9 @@ import {
   generatePrimeTable,
   insertMultiplicationTable,
   resetTable,
+  validatePrimeForm,
+  addNFieldError,
+  removeNFieldError,
 } from '@app/primeTable';
 
 describe('primeTable', () => {
@@ -110,6 +113,67 @@ describe('primeTable', () => {
       await generatePrimeTable(3, container);
 
       expect(fetchMock).toHaveBeenCalled();
+    });
+  });
+
+  describe('validatePrimeForm', () => {
+    it('when n valid parses n as an int', () => {
+      const n = validatePrimeForm('2');
+
+      expect(n).toBe(2);
+    });
+    it('when n not an integer returns null', () => {
+      const n = validatePrimeForm('bad');
+
+      expect(n).toBeNull();
+    });
+    it('when n is less than 1 returns null', () => {
+      const n = validatePrimeForm('0');
+
+      expect(n).toBeNull();
+    });
+  });
+
+  describe('addNFieldError', () => {
+    beforeAll(() => {
+      document.body.innerHTML = `<div id="n-field"><input id="n" class="form__input"></div>`;
+    });
+
+    it('adds error message', () => {
+      expect(document.getElementById('n-error')).toBeNull();
+
+      addNFieldError();
+
+      expect(document.getElementById('n-error')).not.toBeNull();
+    });
+    it('adds error class to input', () => {
+      addNFieldError();
+
+      expect(document.getElementById('n')?.className).toBe(
+        'form__input form__input--error'
+      );
+    });
+  });
+
+  describe('removeNFieldError', () => {
+    beforeAll(() => {
+      document.body.innerHTML = `<div id="n-field">
+        <input id="n" class="form__input form__input--error">
+        <div id="n-error">Must be a positive integer</div>
+      </div>`;
+    });
+
+    it('removes error', () => {
+      expect(document.getElementById('n-error')).not.toBeNull();
+
+      removeNFieldError();
+
+      expect(document.getElementById('n-error')).toBeNull();
+    });
+    it('removes error class from input', () => {
+      removeNFieldError();
+
+      expect(document.getElementById('n')?.className).toBe('form__input');
     });
   });
 });

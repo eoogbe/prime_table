@@ -49,7 +49,6 @@ in idomatic places.
 
 ## What I would do if I had more time
 
-- Input validation (Issue #1)
 - Convert each number in the table into a link to a new prime table for that number as n (Issue #3)
 
 ## Structure
