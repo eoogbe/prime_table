@@ -7,7 +7,7 @@ class RangeValidator
 
   attr_reader :min, :max
 
-  validates :max, numericality: { only_integer: true, greater_than: 0 }
+  validates :max, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :min, numericality: { only_integer: true, greater_than: 0 }
   validates :min, numericality: { less_than_or_equal_to: :max },
                   unless: -> { errors.include?(:max) || errors.of_kind?(:min, :not_a_number) }

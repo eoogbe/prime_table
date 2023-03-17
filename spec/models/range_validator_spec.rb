@@ -51,6 +51,13 @@ RSpec.describe RangeValidator do
       expect(validator.errors[:min]).to include('must be less than or equal to max')
     end
 
+    it 'validates max presence' do
+      validator = described_class.new('1', nil)
+
+      expect(validator).not_to be_valid
+      expect(validator.errors).to be_of_kind(:max, :blank)
+    end
+
     it 'when max is not a number is not valid' do
       validator = described_class.new('2', 'bad')
 
