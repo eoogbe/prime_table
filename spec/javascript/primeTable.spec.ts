@@ -135,12 +135,22 @@ describe('primeTable', () => {
 
   describe('updateNFieldError', () => {
     it('when valid removes error', () => {
-      document.body.innerHTML = `<div id="n-error">Must be a positive integer</div>`;
+      document.body.innerHTML = `<div id="n-field">
+          <div id="n-error">Must be a positive integer</div>
+        </div>`;
       expect(document.getElementById('n-error')).not.toBeNull();
 
       updateNFieldError(true);
 
       expect(document.getElementById('n-error')).toBeNull();
+    });
+    it('when invalid adds error', () => {
+      document.body.innerHTML = `<div id="n-field"></div>`;
+      expect(document.getElementById('n-error')).toBeNull();
+
+      updateNFieldError(false);
+
+      expect(document.getElementById('n-error')).not.toBeNull();
     });
   });
 });

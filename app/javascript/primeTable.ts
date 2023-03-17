@@ -195,6 +195,12 @@ export const validatePrimeForm = (value: string): number | null => {
 export const updateNFieldError = (isValid: boolean): void => {
   if (isValid) {
     document.getElementById('n-error')?.remove();
+  } else if (document.getElementById('n-error') == null) {
+    const errorText = document.createElement('div');
+    errorText.id = 'n-error';
+    errorText.className = 'form__field-error';
+    errorText.textContent = 'Must be a positive integer';
+    document.getElementById('n-field')?.appendChild(errorText);
   }
 };
 
