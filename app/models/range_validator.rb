@@ -22,6 +22,6 @@ class RangeValidator
   # Returns the range represented by min and max.
   # @return [Range]
   def range
-    (min.to_i..max.to_i)
+    @range ||= (min.to_i..max.to_i)
   end
 end
