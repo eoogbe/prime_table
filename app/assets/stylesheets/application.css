@@ -13,3 +13,106 @@
  *= require_tree .
  *= require_self
  */
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  color-scheme: dark;
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: #000;
+  box-sizing: border-box;
+  color: #fff;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  letter-spacing: 1.5;
+  line-height: 1.5;
+  margin: 0.5em;
+}
+
+.page-title {
+  font-size: 2.125rem;
+  font-weight: 400;
+  letter-spacing: 0.00735em;
+  line-height: 1.235;
+  text-align: center;
+}
+
+.form {
+  margin-bottom: 1em;
+}
+
+.form__field {
+  margin-bottom: 0.5em;
+}
+
+.form__label {
+  letter-spacing: 0.00938em;
+  line-height: 1.4375em;
+}
+
+.form__input {
+  border: 1px solid rgba(255, 255, 255, 0.23);
+  border-radius: 4px;
+  letter-spacing: 0.00938em;
+  line-height: 1.4375em;
+  height: 1.4375em;
+  padding: 1.031em 0.875em;
+}
+
+.form__input:focus {
+  outline: 2px solid #3f51b5;
+}
+
+.button {
+  background: #fff;
+  border: 0;
+  border-radius: 4px;
+  color: #000;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.563em;
+  margin: 0;
+  padding: 0.375em 1em;
+  vertical-align: middle;
+}
+
+.button:hover {
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.table__row {
+  outline: 0;
+  vertical-align: middle;
+}
+
+.table__cell {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.68);
+  font-size: 0.875rem;
+  letter-spacing: 0.01071em;
+  line-height: 0.875rem;
+  padding: 1.143em;
+  text-align: right;
+  vertical-align: inherit;
+}
+
+.table__cell--head {
+  font-weight: 500;
+  line-height: 1.714em;
+}
