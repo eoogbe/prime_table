@@ -17,6 +17,7 @@ RSpec.describe RangeValidator do
     end
   end
 
+  # rubocop:disable RSpec/MultipleExpectations
   describe 'validation' do
     it 'when min and max valid is valid' do
       validator = described_class.new('2', '3')
@@ -46,6 +47,7 @@ RSpec.describe RangeValidator do
       validator = described_class.new('4', '3')
 
       expect(validator).not_to be_valid
+      expect(validator.errors[:min]).to include('must be less than or equal to max')
     end
 
     it 'when max is not a number is not valid' do
@@ -54,13 +56,12 @@ RSpec.describe RangeValidator do
       expect(validator).not_to be_valid
     end
 
-    # rubocop:disable RSpec/MultipleExpectations
     it 'when max is less than 1 has error on max' do
       validator = described_class.new('2', '0')
 
       expect(validator).not_to be_valid
       expect(validator.errors).to be_of_kind(:max, :greater_than)
     end
-    # rubocop:enable RSpec/MultipleExpectations
   end
+  # rubocop:enable RSpec/MultipleExpectations
 end
