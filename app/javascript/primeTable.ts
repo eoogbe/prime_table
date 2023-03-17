@@ -176,9 +176,15 @@ export const generatePrimeTable = async (
   }
 };
 
-export const validatePrimeForm = (val: string | null): number | null => {
-  if (val == null || val.length === 0) return null;
-  return parseInt(val, 10);
+/**
+ * Parses `value` as a positive integer if valid, otherwise returns `null`.
+ * @param value the value to parse
+ * @return the parsed value, or `null` if the value is invalid
+ */
+export const validatePrimeForm = (value: string): number | null => {
+  const n = parseInt(value, 10);
+  if (isNaN(n)) return null;
+  return n;
 };
 
 const primeFormHander = async (
