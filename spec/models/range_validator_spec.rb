@@ -18,6 +18,12 @@ RSpec.describe RangeValidator do
       expect(validator).to be_valid
     end
 
+    it 'when min nil is valid' do
+      validator = described_class.new(nil, '3')
+
+      expect(validator).to be_valid
+    end
+
     it 'when min is not a number is not valid' do
       validator = described_class.new('bad', '3')
 
