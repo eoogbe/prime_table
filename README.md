@@ -50,6 +50,7 @@ in idomatic places.
 ## What I would do if I had more time
 
 - Convert each number in the table into a link to a new prime table for that number as n (Issue #3)
+- Support n > 1000 on the client. (Currently just works on the server.) (Issue #6)
 
 ## Structure
 
