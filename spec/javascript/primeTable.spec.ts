@@ -4,6 +4,7 @@ import {
   insertMultiplicationTable,
   resetTable,
   validatePrimeForm,
+  updateNFieldError,
 } from '@app/primeTable';
 
 describe('primeTable', () => {
@@ -129,6 +130,17 @@ describe('primeTable', () => {
       const n = validatePrimeForm('0');
 
       expect(n).toBeNull();
+    });
+  });
+
+  describe('updateNFieldError', () => {
+    it('when valid removes error', () => {
+      document.body.innerHTML = `<div id="n-error">Must be a positive integer</div>`;
+      expect(document.getElementById('n-error')).not.toBeNull();
+
+      updateNFieldError(true);
+
+      expect(document.getElementById('n-error')).toBeNull();
     });
   });
 });

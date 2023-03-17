@@ -188,6 +188,16 @@ export const validatePrimeForm = (value: string): number | null => {
   return n;
 };
 
+/**
+ * If valid removes the error message for the n field, otherwise adds the error message.
+ * @param isValid `true` if the field is valid
+ */
+export const updateNFieldError = (isValid: boolean): void => {
+  if (isValid) {
+    document.getElementById('n-error')?.remove();
+  }
+};
+
 const primeFormHander = async (
   e: SubmitEvent,
   container: Element
