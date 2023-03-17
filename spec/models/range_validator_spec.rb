@@ -35,5 +35,11 @@ RSpec.describe RangeValidator do
 
       expect(validator).not_to be_valid
     end
+
+    it 'when max is not a number returns false' do
+      validator = described_class.new('2', 'bad')
+
+      expect(validator).not_to be_valid
+    end
   end
 end
